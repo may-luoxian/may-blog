@@ -9,8 +9,8 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        // target: 'http://www.luoxian.tech:8080',
-        target: 'http://localhost:8080',
+        target: 'http://www.luoxian.tech:8080',
+        // target: 'http://localhost:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

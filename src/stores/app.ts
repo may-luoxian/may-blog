@@ -3,10 +3,12 @@ import { i18n } from '@/locales/index'
 import cookies from 'js-cookie'
 import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import appSetting from '@/setting/appSetting'
 
 const DEFAULT_COLOR_1: string = '#24c6dc'
 const DEFAULT_COLOR_2: string = '#5433ff'
 const DEFAULT_COLOR_3: string = '#ff0099'
+const { appConfig } = appSetting
 
 nProgress.configure({
   showSpinner: false,
@@ -24,6 +26,13 @@ const setTheme = (theme: string) => {
   }
 }
 
+const isCustomStyle = (default_style: string): string => {
+  if (appConfig.customStyle) {
+    return ''
+  }
+  return default_style
+}
+
 export const useAppStore = defineStore('appStore', {
   state: () => {
     return {
@@ -32,13 +41,13 @@ export const useAppStore = defineStore('appStore', {
         profile_shape: 'circle-avatar',
         feature: true,
         gradient: {
-          color_1: DEFAULT_COLOR_1,
-          color_2: DEFAULT_COLOR_2,
-          color_3: DEFAULT_COLOR_3
+          color_1: isCustomStyle(DEFAULT_COLOR_1),
+          color_2: isCustomStyle(DEFAULT_COLOR_2),
+          color_3: isCustomStyle(DEFAULT_COLOR_3)
         },
-        header_gradient_css: `linear-gradient(130deg, ${DEFAULT_COLOR_1}, ${DEFAULT_COLOR_2} 41.07%, ${DEFAULT_COLOR_3} 76.05%)`,
+        header_gradient_css: `linear-gradient(130deg, ${isCustomStyle(DEFAULT_COLOR_1)}, ${isCustomStyle(DEFAULT_COLOR_2)} 41.07%, ${isCustomStyle(DEFAULT_COLOR_3)} 76.05%)`,
         background_gradient_style: {
-          background: `linear-gradient(130deg, ${DEFAULT_COLOR_1}, ${DEFAULT_COLOR_2} 41.07%, ${DEFAULT_COLOR_3} 76.05%)`,
+          background: `linear-gradient(130deg, ${isCustomStyle(DEFAULT_COLOR_1)}, ${isCustomStyle(DEFAULT_COLOR_2)} 41.07%, ${isCustomStyle(DEFAULT_COLOR_3)} 76.05%)`,
           '-webkit-background-clip': 'text',
           '-webkit-text-fill-color': 'transparent',
           '-webkit-box-decoration-break': 'clone',
