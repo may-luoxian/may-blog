@@ -26,11 +26,11 @@ const setTheme = (theme: string) => {
   }
 }
 
-const isCustomStyle = (default_style: string): string => {
+const isCustomStyle = (defaultStyle: string): string => {
   if (appConfig.customStyle) {
     return ''
   }
-  return default_style
+  return defaultStyle
 }
 
 export const useAppStore = defineStore('appStore', {

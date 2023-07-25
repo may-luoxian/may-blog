@@ -335,7 +335,9 @@ export default defineComponent({
           reactiveData.comments = data.data.records
           reactiveData.isReload = false
         } else {
-          reactiveData.comments.push(...data.data.records)
+          if (Array.isArray(data.data.records)) {
+            reactiveData.comments.push(...data.data.records)
+          }
         }
         if (data.data.count <= reactiveData.comments.length) {
           reactiveData.haveMore = false
