@@ -18,6 +18,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import infiniteScroll from 'vue3-infinite-scroll-better'
 import v3ImgPreview from 'v3-img-preview'
 import api from './api/api'
+import '@/utils/sw'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

@@ -1,5 +1,7 @@
 const path = require('path')
 const { defineConfig } = require('@vue/cli-service')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -23,7 +25,15 @@ module.exports = defineConfig({
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    plugins: [
+      new WorkboxPlugin.GenerateSW({
+        // 这些选项帮助快速启用 ServiceWorkers
+        // 不允许遗留任何“旧的” ServiceWorkers
+        clientsClaim: true,
+        skipWaiting: true
+      })
+    ]
   },
   chainWebpack: (config) => {
     config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js')
